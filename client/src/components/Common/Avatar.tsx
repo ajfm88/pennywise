@@ -7,9 +7,7 @@ interface AvatarProps {
 }
 
 export default function Avatar({ userName, avatarFileName }: AvatarProps) {
-  const avatarUrl = avatarFileName
-    ? `http://localhost:8000/uploads/avatars/${avatarFileName}`
-    : null;
+  const avatarUrl = avatarFileName || null;
 
   return (
     <>

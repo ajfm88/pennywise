@@ -1,10 +1,10 @@
 import { Request, Response, NextFunction } from "express";
 import { asyncHandler, sendSuccess } from "../utils/responseHelpers";
 import { AppError } from "../middleware/errorHandler";
+import { formatImage } from "../middleware/upload";
 import User from "../models/User";
 import bcrypt from "bcryptjs";
-import path from "node:path";
-import fs from "node:fs";
+import { v2 as cloudinary } from "cloudinary";
 import Expense from "../models/Expense";
 
 export const getProfile = asyncHandler(
@@ -36,12 +36,6 @@ export const updateProfile = asyncHandler(
     if (!user) {
       throw new AppError("User not found", 404);
     }
-
-    // const user = await User.findOne({ _id: userId });
-
-    // if (!user) {
-    //   throw new AppError("User not found!", 404);
-    // }
 
     if (!name && !email && !password) {
       throw new AppError(
@@ -117,54 +111,32 @@ export const uploadAvatar = asyncHandler(
       throw new AppError("Please upload an image file", 400);
     }
 
-    const filename = req.file.filename;
     const user = await User.findOne({ _id: userId });
 
     if (!user) {
       throw new AppError("User not found", 404);
     }
 
-    if (user.avatar) {
-      const oldAvatarPath = path.join("upload", "avatars", user.avatar);
-
-      if (fs.existsSync(oldAvatarPath)) {
-        fs.unlinkSync(oldAvatarPath);
-      }
+    // Delete old avatar from Cloudinary if it exists
+    if (user.avatarPublicId) {
+      await cloudinary.uploader.destroy(user.avatarPublicId);
     }
 
-    user.avatar = filename;
+    const dataUri = formatImage(req.file);
+    const result = await cloudinary.uploader.upload(dataUri, {
+      folder: "pennywise/avatars",
+    });
+
+    user.avatar = result.secure_url;
+    user.avatarPublicId = result.public_id;
 
     await user.save();
 
     sendSuccess(
       res,
-      { avatar: filename, avatarUrl: `/uploads/avatars/${filename}` },
+      { avatar: result.secure_url, avatarUrl: result.secure_url },
       "Avatar uploaded successfully",
     );
-  },
-);
-
-export const getAvatar = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction) => {
-    const userId = req.userId;
-
-    const user = await User.findOne({ _id: userId });
-
-    if (!user) {
-      throw new AppError("User not found", 404);
-    }
-
-    if (!user.avatar) {
-      throw new AppError("No avatar found for this user", 404);
-    }
-
-    const avatarPath = path.join("uploads", "avatars", user.avatar);
-
-    if (!fs.existsSync(avatarPath)) {
-      throw new AppError("Avatar file not found", 404);
-    }
-
-    res.sendFile(path.resolve(avatarPath));
   },
 );
 
@@ -182,13 +154,12 @@ export const deleteAvatar = asyncHandler(
       throw new AppError("No avatar found for this user", 404);
     }
 
-    const avatarPath = path.join("uploads", "avatars", user.avatar);
-
-    if (fs.existsSync(avatarPath)) {
-      fs.unlinkSync(avatarPath);
+    if (user.avatarPublicId) {
+      await cloudinary.uploader.destroy(user.avatarPublicId);
     }
 
     user.avatar = undefined;
+    user.avatarPublicId = undefined;
 
     await user.save();
 
@@ -255,12 +226,8 @@ export const deleteAccount = asyncHandler(
 
     await Expense.deleteMany({ userId });
 
-    if (user.avatar) {
-      const avatarPath = path.join("uploads", "avatars", user.avatar);
-
-      if (fs.existsSync(avatarPath)) {
-        fs.unlinkSync(avatarPath);
-      }
+    if (user.avatarPublicId) {
+      await cloudinary.uploader.destroy(user.avatarPublicId);
     }
 
     await User.findByIdAndDelete(userId);

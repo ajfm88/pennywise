@@ -3,7 +3,6 @@ import {
   deleteAccount,
   deleteAvatar,
   exportData,
-  getAvatar,
   getProfile,
   updateProfile,
   uploadAvatar,
@@ -16,7 +15,6 @@ const router = Router();
 router.get("/", requireAuth, getProfile);
 router.put("/", requireAuth, updateProfile);
 router.post("/avatar", requireAuth, upload.single("avatar"), uploadAvatar);
-router.get("/avatar", requireAuth, getAvatar);
 router.delete("/avatar", requireAuth, deleteAvatar);
 router.get("/export", requireAuth, exportData);
 router.delete("/account", requireAuth, deleteAccount);

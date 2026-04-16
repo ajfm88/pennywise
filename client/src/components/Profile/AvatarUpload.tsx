@@ -51,9 +51,7 @@ export default function AvatarUpload() {
     setPreviewUrl(null);
   }
 
-  const avatarUrl = user?.avatar
-    ? `http://localhost:8000/uploads/avatars/${user.avatar}`
-    : null;
+  const avatarUrl = user?.avatar || null;
 
   return (
     <div className=" border border-purple-950 rounded-sm p-6">

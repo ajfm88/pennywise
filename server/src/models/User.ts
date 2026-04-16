@@ -19,6 +19,9 @@ const userSchema = new Schema<IUser>(
     avatar: {
       type: String,
     },
+    avatarPublicId: {
+      type: String,
+    },
   },
   {
     timestamps: true,

@@ -3,20 +3,7 @@ import path from "node:path";
 import { Request } from "express";
 import { AppError } from "./errorHandler";
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "uploads/avatars/");
-  },
-
-  filename: (req: Request, file, cb) => {
-    const userId = req.userId;
-    const timestamp = Date.now();
-    const ext = path.extname(file.originalname);
-    const filename = `${userId}-${timestamp}${ext}`;
-
-    cb(null, filename);
-  },
-});
+const storage = multer.memoryStorage();
 
 const fileFilter = (
   req: Request,
@@ -33,9 +20,14 @@ const fileFilter = (
 };
 
 export const upload = multer({
-  storage: storage,
-  fileFilter: fileFilter,
+  storage,
+  fileFilter,
   limits: {
     fileSize: 1024 * 1024 * 5,
   },
 });
+
+export const formatImage = (file: Express.Multer.File): string => {
+  const ext = path.extname(file.originalname);
+  return `data:${file.mimetype};base64,${file.buffer.toString("base64")}`;
+};
