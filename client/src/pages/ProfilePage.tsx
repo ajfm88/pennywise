@@ -63,7 +63,9 @@ export default function ProfilePage() {
               <ProfileView user={user} />
               <button
                 onClick={handleEdit}
-                className="px-6 py-3 bg-purple-950 text-gray-100 rounded-sm hover:bg-purple-800 transition-colors cursor-pointer  font-medium row-start-2 col-span-2 sm:col-span-1"
+                disabled={user.email === "demo@pennywise.app"}
+                title={user.email === "demo@pennywise.app" ? "Not available for the demo account." : undefined}
+                className="px-6 py-3 bg-purple-950 text-gray-100 rounded-sm hover:bg-purple-800 transition-colors cursor-pointer font-medium row-start-2 col-span-2 sm:col-span-1 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-purple-950"
               >
                 Edit Profile
               </button>
@@ -82,14 +84,28 @@ export default function ProfilePage() {
               Permanently delete your account and all data. This action cannot
               be undone.
             </p>
-            <button
-              onClick={() => setIsModalOpen(true)}
-              className="px-4 py-2 bg-red-800 hover:bg-red-700 text-white rounded-sm flex items-center gap-2 transition-colors"
-            >
-              <Trash2 className="size-4" />
-              Delete Account
-            </button>
-          </div>
+            {user.email === "demo@pennywise.app" ? (
+              <div className="flex flex-col gap-1">
+                <button
+                  disabled
+                  className="px-4 py-2 bg-red-800/40 text-white/40 rounded-sm flex items-center gap-2 cursor-not-allowed"
+                >
+                  <Trash2 className="size-4" />
+                  Delete Account
+                </button>
+                <p className="text-xs text-gray-500">
+                  Not available for the demo account.
+                </p>
+              </div>
+            ) : (
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="px-4 py-2 bg-red-800 hover:bg-red-700 text-white rounded-sm flex items-center gap-2 transition-colors"
+              >
+                <Trash2 className="size-4" />
+                Delete Account
+              </button>
+            )}
 
           <DeleteAccountModal
             isOpen={isModalOpen}
@@ -97,6 +113,7 @@ export default function ProfilePage() {
             onConfirm={handleDeleteAccount}
             isDeleting={isDeleting}
           />
+          </div>
         </>
       )}
     </main>

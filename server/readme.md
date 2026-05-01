@@ -334,5 +334,4 @@ All errors are handled globally by `src/middleware/errorHandler.ts`. Every error
 | `npm run dev` | Start development server with hot reloading via nodemon |
 
 ---
-
-Happy Coding and Learning! 🙂
+<a href="https://pennywise-backend-ajfm88.onrender.com"><img src="https://img.shields.io/badge/Backend-Render-46E3B7?style=for-the-badge&logo=render"/></a>

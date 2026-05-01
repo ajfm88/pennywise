@@ -19,6 +19,6 @@ export const Route = createFileRoute("/analytics")({
 
   component: AnalyticsPage,
   context: () => ({
-    title: "Analytics - PennyWise",
+    title: "Analytics - PennyWise 🪙",
   }),
 });

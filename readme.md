@@ -2,6 +2,15 @@
 
 A secure, full-stack personal finance application built with MongoDB, Express, React, and Node.js. PennyWise allows users to track expenses, visualize spending patterns through interactive charts, and manage their financial data — all behind a secure JWT-authenticated API.
 
+## Demo Account
+
+You can log in with the following credentials to explore the app with pre-loaded data:
+
+| Field    | Value                |
+| -------- | -------------------- |
+| Email    | `demo@pennywise.app` |
+| Password | `Demo#1234`          |
+
 ## Features
 
 - **User Authentication** — Secure sign up and login with JWT tokens
@@ -46,17 +55,23 @@ A secure, full-stack personal finance application built with MongoDB, Express, R
 - **dotenv** — Environment variable management
 - **tsx + nodemon** — TypeScript execution and hot reloading
 
+## Live App
+
+<a href="https://pennywise-ajfm88.netlify.app"><img src="https://img.shields.io/badge/Frontend-Netlify-00C7B7?style=for-the-badge&logo=netlify"/></a>
+<a href="https://pennywise-backend-ajfm88.onrender.com"><img src="https://img.shields.io/badge/Backend-Render-46E3B7?style=for-the-badge&logo=render"/></a>
+
 ## Screenshots
 
-| Page      | Preview                                                |
-| --------- | ------------------------------------------------------ |
-| Sign Up   | ![Signup](./-readme-pics/1-Signup-PennyWise.png)       |
-| Login     | ![Login](./-readme-pics/2-Login-PennyWise.png)         |
-| Home      | ![Home](./-readme-pics/3-Home-PennyWise.png)           |
-| Dashboard | ![Dashboard](./-readme-pics/4-Dashboard-PennyWise.png) |
-| Expenses  | ![Expenses](./-readme-pics/5-Expenses-PennyWise.png)   |
-| Analytics | ![Analytics](./-readme-pics/6-Analytics-PennyWise.png) |
-| Profile   | ![Profile](./-readme-pics/7-Profile-PennyWise.png)     |
+| Page       | Preview                                                 |
+| ---------- | ------------------------------------------------------- |
+| Sign Up    | ![Signup](./-readme-pics/01-Signup-PennyWise.png)       |
+| Login      | ![Login](./-readme-pics/02-Login-PennyWise.png)         |
+| Home       | ![Home](./-readme-pics/03-Home-PennyWise.png)           |
+| Dashboard  | ![Dashboard](./-readme-pics/04-Dashboard-PennyWise.png) |
+| Expenses   | ![Expenses](./-readme-pics/05-Expenses-PennyWise.png)   |
+| Analytics  | ![Analytics](./-readme-pics/06-Analytics-PennyWise.png) |
+| Profile    | ![Profile](./-readme-pics/07-Profile-PennyWise.png)     |
+| Tech Stack | ![Tech Stack](./-readme-pics/mern.png)                  |
 
 ## Prerequisites
 
@@ -359,6 +374,6 @@ You receive the token in the response body upon successful login.
 
 ### Tutorial
 
-This projects is a modified version of the following tutorial:
+This projects is a heavily modified version of the following tutorial:
 
 <a href="https://www.youtube.com/watch?v=2Wl-uPl2hyY"><img src="https://github-production-user-asset-6210df.s3.amazonaws.com/151519281/289277158-1736fca5-a031-4854-8c09-bc110e3bc16d.svg"/></a>

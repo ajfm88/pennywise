@@ -2,14 +2,14 @@ import { useAuthStore } from "@/store/authStore";
 import { Download } from "lucide-react";
 
 export default function ExportDataButton() {
-  const { exportData, exportedData, isLoading } = useAuthStore();
+  const { exportData, isLoading } = useAuthStore();
 
   async function handleExport() {
-    await exportData();
+    const data = await exportData();
 
-    if (!exportData) return;
+    if (!data) return;
 
-    const jsonString = JSON.stringify(exportedData, null, 2);
+    const jsonString = JSON.stringify(data, null, 2);
 
     const blob = new Blob([jsonString], { type: "application/json" });
 

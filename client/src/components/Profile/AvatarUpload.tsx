@@ -9,6 +9,8 @@ export default function AvatarUpload() {
 
   const { user, uploadAvatar, deleteAvatar, isLoading, error } = useAuthStore();
 
+  const isDemo = user?.email === "demo@pennywise.app";
+
   function handleFileSelect(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
 
@@ -82,7 +84,14 @@ export default function AvatarUpload() {
 
         <div className="flex flex-col gap-3 flex-1 items-center">
           <div className="flex gap-3">
-            <label className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-sm cursor-pointer flex items-center gap-2 transition-colors">
+            <label
+              title={isDemo ? "Not available for the demo account." : undefined}
+              className={`px-4 py-2 text-white rounded-sm flex items-center gap-2 transition-colors ${
+                isDemo || isLoading
+                  ? "bg-purple-600/40 opacity-50 cursor-not-allowed"
+                  : "bg-purple-600 hover:bg-purple-700 cursor-pointer"
+              }`}
+            >
               <Upload className="size-4" />
               Choose Photo
               <input
@@ -90,7 +99,7 @@ export default function AvatarUpload() {
                 accept="image/jpeg,image/jpg,image/png"
                 onChange={handleFileSelect}
                 className="hidden"
-                disabled={isLoading}
+                disabled={isLoading || isDemo}
               />
             </label>
 

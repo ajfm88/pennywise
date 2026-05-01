@@ -25,7 +25,7 @@ interface AuthStore extends AuthState {
 
   uploadAvatar: (file: File) => Promise<void>;
   deleteAvatar: () => Promise<void>;
-  exportData: () => Promise<void>;
+  exportData: () => Promise<unknown>;
   deleteAccount: () => Promise<void>;
 
   logout: () => void;
@@ -207,6 +207,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
           isLoading: false,
           error: null,
         });
+        return response.data;
       }
     } catch (error) {
       const err = error as AxiosError<{ error: string }>;

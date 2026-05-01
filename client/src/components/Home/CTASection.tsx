@@ -29,7 +29,7 @@ export default function CTASection() {
             to="/signup"
             className="inline-flex items-center gap-2 px-8 py-4  border border-purple-950 text-white text-lg font-semibold rounded-sm"
           >
-            Sign Up Free
+            Sign Up for Free
             <ArrowRight className="size-5" />
           </Link>
         )}

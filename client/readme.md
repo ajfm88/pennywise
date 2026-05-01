@@ -222,5 +222,4 @@ All API requests go through `src/services/api.ts`, which is an Axios instance co
 | `npm run preview` | Preview the production build locally                |
 
 ---
-
-Happy Coding and Learning! 🙂
+<a href="https://pennywise-ajfm88.netlify.app"><img src="https://img.shields.io/badge/Frontend-Netlify-00C7B7?style=for-the-badge&logo=netlify"/></a>

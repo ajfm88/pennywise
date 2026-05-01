@@ -15,7 +15,7 @@ function RootLayout() {
 
   const activeMatch = matches[matches.length - 1];
 
-  const { title = "PennyWise" } = activeMatch.context as { title: string };
+  const { title = "PennyWise 🪙" } = activeMatch.context as { title: string };
 
   useEffect(() => {
     document.title = title;

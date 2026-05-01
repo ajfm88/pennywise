@@ -24,6 +24,16 @@ export default function LoginForm() {
     }
   }
 
+  async function loginDemoUser() {
+    await login("demo@pennywise.app", "Demo#1234");
+
+    const { isAuthenticated } = useAuthStore.getState();
+
+    if (isAuthenticated) {
+      navigate({ to: "/dashboard" });
+    }
+  }
+
   function togglePasswordVisibility() {
     setShowPassword((prev) => !prev);
   }
@@ -97,6 +107,15 @@ export default function LoginForm() {
           className="px-6 py-3 bg-purple-800 text-gray-100 rounded-sm hover:bg-purple-700 transition-colors cursor-pointer border border-purple-700 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isLoading ? "Logging in ..." : "Login"}
+        </button>
+
+        <button
+          type="button"
+          disabled={isLoading}
+          onClick={loginDemoUser}
+          className="px-6 py-3 bg-slate-700 text-gray-100 rounded-sm hover:bg-slate-600 transition-colors cursor-pointer border border-slate-600 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          Explore The App
         </button>
       </form>
 

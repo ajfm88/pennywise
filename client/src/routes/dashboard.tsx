@@ -19,6 +19,6 @@ export const Route = createFileRoute("/dashboard")({
 
   component: DashboardPage,
   context: () => ({
-    title: "Dashboard - PennyWise",
+    title: "Dashboard - PennyWise 🪙",
   }),
 });

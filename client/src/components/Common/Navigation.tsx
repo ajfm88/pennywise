@@ -1,6 +1,5 @@
 import { useAuthStore } from "@/store/authStore";
 import { Link, useNavigate } from "@tanstack/react-router";
-import { DollarSign } from "lucide-react";
 import Avatar from "./Avatar";
 
 export default function Navigation() {
@@ -20,7 +19,7 @@ export default function Navigation() {
           to="/"
           className="flex items-center gap-2 self-start md:self-auto md:grow"
         >
-          <DollarSign className="h-8 w-8 text-purple-400" />
+          <img src="/pennywise-logo.svg" alt="PennyWise logo" className="h-8 w-8" />
           <span className="text-xl font-bold text-gray-100">PennyWise</span>
         </Link>
 
@@ -83,13 +82,17 @@ export default function Navigation() {
             </ul>
 
             <div className="flex items-center gap-4 self-end">
-              {user && (
-                <Avatar userName={user.name} avatarFileName={user.avatar} />
-              )}
-
-              <span className="text-md text-white capitalize font-mono font-bold">
-                {user?.name}
-              </span>
+              <Link
+                to="/profile"
+                className="flex items-center gap-4 cursor-pointer"
+              >
+                {user && (
+                  <Avatar userName={user.name} avatarFileName={user.avatar} />
+                )}
+                <span className="text-md text-white capitalize font-mono font-bold">
+                  {user?.name}
+                </span>
+              </Link>
               <button
                 onClick={handleLogout}
                 className="px-4 py-2 border border-purple-700 text-purple-300 rounded-sm hover:bg-purple-900 transition-colors cursor-pointer"
