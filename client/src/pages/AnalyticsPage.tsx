@@ -215,12 +215,13 @@ export default function AnalyticsPage() {
           <CategoryPieChart data={categoryData} selectedPeriod="all" />
         )}
 
-        <div className="flex flex-col gap-6">
-          <AIInsightsCard />
-          {currentMonthData.length > 0 && (
-            <CurrentMonthBarChart data={currentMonthData} />
-          )}
-        </div>
+        {currentMonthData.length > 0 && (
+          <CurrentMonthBarChart data={currentMonthData} />
+        )}
+      </div>
+
+      <div className="mt-6">
+        <AIInsightsCard />
       </div>
 
       {categoryData.length > 0 && (
