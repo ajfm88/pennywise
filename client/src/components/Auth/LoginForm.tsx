@@ -1,6 +1,7 @@
 import { useAuthStore } from "@/store/authStore";
+import { useBackendStore } from "@/store/backendStore";
 import { Link, useNavigate } from "@tanstack/react-router";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { useState } from "react";
 
 export default function LoginForm() {
@@ -11,6 +12,7 @@ export default function LoginForm() {
   const navigate = useNavigate();
 
   const { isLoading, error, login } = useAuthStore();
+  const { isWakingUp } = useBackendStore();
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -46,6 +48,13 @@ export default function LoginForm() {
       </div>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+        {isWakingUp && (
+          <div className="px-4 py-3 bg-amber-900/20 border border-amber-700/50 rounded-sm flex items-center gap-3 text-amber-400 text-sm">
+            <Loader2 className="size-4 shrink-0 animate-spin" />
+            Server is warming up, this may take a few seconds…
+          </div>
+        )}
+
         {error && (
           <div className="px-4 py-3 bg-red-900/20 border border-red-700 rounded-sm text-red-400">
             {error}

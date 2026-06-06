@@ -1,3 +1,4 @@
+import AIInsightsCard from "@/components/Analytics/AIInsightsCard";
 import AllYearsChart from "@/components/Analytics/AllYearsChart";
 import CategoryTable from "@/components/Analytics/CategoryTable";
 import CurrentMonthBarChart from "@/components/Analytics/CurrentMonthBarChart";
@@ -214,9 +215,12 @@ export default function AnalyticsPage() {
           <CategoryPieChart data={categoryData} selectedPeriod="all" />
         )}
 
-        {currentMonthData.length > 0 && (
-          <CurrentMonthBarChart data={currentMonthData} />
-        )}
+        <div className="flex flex-col gap-6">
+          <AIInsightsCard />
+          {currentMonthData.length > 0 && (
+            <CurrentMonthBarChart data={currentMonthData} />
+          )}
+        </div>
       </div>
 
       {categoryData.length > 0 && (

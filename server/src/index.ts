@@ -3,6 +3,7 @@ import expenseRoutes from "./routes/expenseRoutes";
 import authRoutes from "./routes/authRoutes";
 import profileRoutes from "./routes/profileRoutes";
 import analyticsRoutes from "./routes/analyticsRoutes";
+import aiRoutes from "./routes/aiRoutes";
 import { errorHandler } from "./middleware/errorHandler";
 import dotenv from "dotenv";
 import cors from "cors";
@@ -47,6 +48,9 @@ app.use("/api/profile", profileRoutes);
 
 // Analytics
 app.use("/api/analytics", analyticsRoutes);
+
+// AI
+app.use("/api/ai", aiRoutes);
 
 app.use((req, res) => {
   res.status(404).json({

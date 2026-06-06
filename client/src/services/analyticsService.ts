@@ -66,3 +66,10 @@ export const getAllYears = async () => {
 
   return response.data;
 };
+
+export const getAIInsights = async () => {
+  const response = await api.get<
+    ApiResponse<{ text: string; type: "positive" | "negative" | "neutral" }[]>
+  >("/ai/insights");
+  return response.data;
+};
