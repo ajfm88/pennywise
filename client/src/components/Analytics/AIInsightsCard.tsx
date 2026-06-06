@@ -38,7 +38,7 @@ export default function AIInsightsCard() {
     setError(null);
     try {
       const response = await getAIInsights();
-      setInsights(response.data);
+      setInsights(response.data ?? []);
       setHasGenerated(true);
     } catch {
       setError("Failed to generate insights. Please try again.");
