@@ -1,6 +1,6 @@
 # 💰 PennyWise — MERN Full Stack Expense Tracker
 
-A secure, full-stack personal finance application built with MongoDB, Express, React, and Node.js. PennyWise allows users to track expenses, visualize spending patterns through interactive charts, and manage their financial data — all behind a secure JWT-authenticated API.
+A secure, full-stack personal finance application built with MongoDB, Express, React, and Node.js. PennyWise allows users to track expenses, visualize spending patterns through interactive charts, get AI-powered financial insights, and manage their financial data — all behind a secure JWT-authenticated API.
 
 ## Demo Account
 
@@ -13,6 +13,7 @@ You can log in with the following credentials to explore the app with pre-loaded
 
 ## Features
 
+- **AI-Powered Insights** — On-demand financial analysis powered by OpenAI (GPT-4o mini), delivering personalized spending insights based on your real expense data
 - **User Authentication** — Secure sign up and login with JWT tokens
 - **Password Security** — bcrypt hashing for safe password storage
 - **Protected Routes** — Middleware-based route protection on both frontend and backend
@@ -50,6 +51,7 @@ You can log in with the following credentials to explore the app with pre-loaded
 - **Mongoose** — MongoDB object modeling
 - **JWT** — JSON Web Tokens for authentication
 - **bcryptjs** — Password hashing
+- **OpenAI SDK** — GPT-4o mini integration for AI-powered expense analysis
 - **Multer** — Avatar file upload handling
 - **CORS** — Cross-origin resource sharing
 - **dotenv** — Environment variable management
@@ -62,16 +64,17 @@ You can log in with the following credentials to explore the app with pre-loaded
 
 ## Screenshots
 
-| Page       | Preview                                                 |
-| ---------- | ------------------------------------------------------- |
-| Sign Up    | ![Signup](./-readme-pics/01-Signup-PennyWise.png)       |
-| Login      | ![Login](./-readme-pics/02-Login-PennyWise.png)         |
-| Home       | ![Home](./-readme-pics/03-Home-PennyWise.png)           |
-| Dashboard  | ![Dashboard](./-readme-pics/04-Dashboard-PennyWise.png) |
-| Expenses   | ![Expenses](./-readme-pics/05-Expenses-PennyWise.png)   |
-| Analytics  | ![Analytics](./-readme-pics/06-Analytics-PennyWise.png) |
-| Profile    | ![Profile](./-readme-pics/07-Profile-PennyWise.png)     |
-| Tech Stack | ![Tech Stack](./-readme-pics/mern.png)                  |
+| Page        | Preview                                                 |
+| ----------- | ------------------------------------------------------- |
+| Sign Up     | ![Signup](./-readme-pics/01-Signup-PennyWise.png)       |
+| Login       | ![Login](./-readme-pics/02-Login-PennyWise.png)         |
+| Home        | ![Home](./-readme-pics/03-Home-PennyWise.png)           |
+| Dashboard   | ![Dashboard](./-readme-pics/04-Dashboard-PennyWise.png) |
+| Expenses    | ![Expenses](./-readme-pics/05-Expenses-PennyWise.png)   |
+| Analytics   | ![Analytics](./-readme-pics/06-Analytics-PennyWise.png) |
+| Profile     | ![Profile](./-readme-pics/07-Profile-PennyWise.png)     |
+| AI Insights | ![AI Insights](./-readme-pics/08-AI-Insights.png)       |
+| Tech Stack  | ![Tech Stack](./-readme-pics/mern.png)                  |
 
 ## Prerequisites
 
@@ -89,6 +92,7 @@ MERN-Full-Stack-PennyWise-App/
 │   ├── src/
 │   │   ├── components/
 │   │   │   ├── Analytics/
+│   │   │   │   ├── AIInsightsCard.tsx
 │   │   │   │   ├── AllYearsChart.tsx
 │   │   │   │   ├── CategoryTable.tsx
 │   │   │   │   ├── CurrentMonthBarChart.tsx
@@ -98,8 +102,8 @@ MERN-Full-Stack-PennyWise-App/
 │   │   │   │   ├── SummaryCard.tsx
 │   │   │   │   ├── YearCategoryChart.tsx
 │   │   │   │   ├── YearlyCategoryChart.tsx
-│   │   │   │   └── YearlyOverviewChart.tsx
-│   │   │   │   ├── YearSelector.tsx
+│   │   │   │   ├── YearlyOverviewChart.tsx
+│   │   │   │   └── YearSelector.tsx
 │   │   │   ├── Auth/
 │   │   │   │   ├── LoginForm.tsx
 │   │   │   │   └── SignupForm.tsx
@@ -162,6 +166,7 @@ MERN-Full-Stack-PennyWise-App/
 │   │   ├── store/
 │   │   │   ├── analyticsStore.ts
 │   │   │   ├── authStore.ts
+│   │   │   ├── backendStore.ts
 │   │   │   └── expenseStore.ts
 │   │   ├── types/
 │   │   │   ├── analytics.types.ts
@@ -192,6 +197,7 @@ MERN-Full-Stack-PennyWise-App/
 │   │   ├── config/
 │   │   │   └── db.ts
 │   │   ├── controllers/
+│   │   │   ├── aiControllers.ts
 │   │   │   ├── analyticsControllers.ts
 │   │   │   ├── authControllers.ts
 │   │   │   ├── expenseControllers.ts
@@ -204,6 +210,7 @@ MERN-Full-Stack-PennyWise-App/
 │   │   │   ├── Expense.ts
 │   │   │   └── User.ts
 │   │   ├── routes/
+│   │   │   ├── aiRoutes.ts
 │   │   │   ├── analyticsRoutes.ts
 │   │   │   ├── authRoutes.ts
 │   │   │   ├── expenseRoutes.ts
@@ -223,14 +230,16 @@ MERN-Full-Stack-PennyWise-App/
 │   ├── package.json
 │   ├── README.md
 │   └── tsconfig.json
-├── PennyWise-Screenshots/
-│   ├── 1-Signup-PennyWise.png
-│   ├── 2-Login-PennyWise.png
-│   ├── 3-Home-PennyWise.png
-│   ├── 4-Dashboard-PennyWise.png
-│   ├── 5-Expenses-PennyWise.png
-│   ├── 6-Analytics-PennyWise.png
-│   └── 7-Profile-PennyWise.png
+├── -readme-pics/
+│   ├── 01-Signup-PennyWise.png
+│   ├── 02-Login-PennyWise.png
+│   ├── 03-Home-PennyWise.png
+│   ├── 04-Dashboard-PennyWise.png
+│   ├── 05-Expenses-PennyWise.png
+│   ├── 06-Analytics-PennyWise.png
+│   ├── 07-Profile-PennyWise.png
+│   ├── 08-AI-Insights.png
+│   └── mern.png
 └── README.md
 ```
 
@@ -252,6 +261,7 @@ PORT=8000
 MONGODBURI=mongodb://localhost:27017/pennywise
 JWT_SECRET=your-secure-jwt-secret-key
 NODE_ENV=development
+OPENAI_API_KEY=your-openai-api-key
 ```
 
 Start MongoDB, then run the server:
@@ -328,6 +338,12 @@ The app will be available at `http://localhost:3000`
 | GET    | `/api/analytics/monthly?year=`           | Monthly totals for a specific year             |
 | GET    | `/api/analytics/yearly-categories?year=` | Monthly category breakdown for a specific year |
 | GET    | `/api/analytics/all-years`               | Total spending grouped by year                 |
+
+### AI Routes (Protected)
+
+| Method | Endpoint           | Description                                      |
+| ------ | ------------------ | ------------------------------------------------ |
+| GET    | `/api/ai/insights` | Generate AI-powered spending insights via OpenAI |
 
 ## Authorization
 

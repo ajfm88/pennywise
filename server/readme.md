@@ -1,6 +1,6 @@
 # PennyWise — Backend (Server)
 
-A REST API built with Express 5, TypeScript, MongoDB, and JWT authentication. The server handles all business logic, database operations, file uploads, and serves analytics data to the PennyWise frontend client.
+A REST API built with Express 5, TypeScript, MongoDB, and JWT authentication. The server handles all business logic, database operations, file uploads, AI-powered expense analysis via OpenAI, and serves analytics data to the PennyWise frontend client.
 
 ## Technologies Used
 
@@ -13,6 +13,7 @@ A REST API built with Express 5, TypeScript, MongoDB, and JWT authentication. Th
 | Mongoose     | 9       | MongoDB object modeling         |
 | jsonwebtoken | 9       | JWT generation and verification |
 | bcryptjs     | 3       | Password hashing                |
+| OpenAI SDK   | 4       | GPT-4o mini for AI insights     |
 | Multer       | 2       | Avatar file upload handling     |
 | CORS         | 2.8     | Cross-origin resource sharing   |
 | dotenv       | 17      | Environment variable management |
@@ -50,6 +51,7 @@ PORT=8000
 MONGODBURI=mongodb://localhost:27017/pennywise
 JWT_SECRET=your-secure-jwt-secret-key
 NODE_ENV=development
+OPENAI_API_KEY=your-openai-api-key
 ```
 
 ### 4. Start MongoDB
@@ -76,6 +78,7 @@ server/
 │   ├── config/
 │   │   └── db.ts                      # MongoDB connection setup
 │   ├── controllers/
+│   │   ├── aiControllers.ts           # AI insights handler (OpenAI integration)
 │   │   ├── analyticsControllers.ts    # Analytics route handlers
 │   │   ├── authControllers.ts         # Signup and login handlers
 │   │   ├── expenseControllers.ts      # Expense CRUD handlers
@@ -88,6 +91,7 @@ server/
 │   │   ├── Expense.ts                 # Mongoose Expense model
 │   │   └── User.ts                    # Mongoose User model
 │   ├── routes/
+│   │   ├── aiRoutes.ts                # /api/ai routes
 │   │   ├── analyticsRoutes.ts         # /api/analytics routes
 │   │   ├── authRoutes.ts              # /api/auth routes
 │   │   ├── expenseRoutes.ts           # /api/expenses routes
@@ -162,6 +166,12 @@ All requests to `/api/expenses` require a valid JWT token.
 | GET    | `/api/analytics/monthly?year=`           | Monthly totals for a specific year                                   |
 | GET    | `/api/analytics/yearly-categories?year=` | Monthly category breakdown for a specific year                       |
 | GET    | `/api/analytics/all-years`               | Total spending and count grouped by year                             |
+
+### AI Routes (Protected)
+
+| Method | Endpoint           | Description                                      |
+| ------ | ------------------ | ------------------------------------------------ |
+| GET    | `/api/ai/insights` | Generate AI-powered spending insights via OpenAI |
 
 ## Authorization
 

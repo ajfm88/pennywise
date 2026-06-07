@@ -67,6 +67,7 @@ client/
 ├── src/
 │   ├── components/
 │   │   ├── Analytics/
+│   │   │   ├── AIInsightsCard.tsx         # AI-powered spending analysis card (OpenAI)
 │   │   │   ├── AllYearsChart.tsx          # Bar chart — total spending per year
 │   │   │   ├── CategoryTable.tsx          # Sortable table — all-time category breakdown
 │   │   │   ├── CurrentMonthBarChart.tsx   # Bar chart — current month by category
@@ -140,6 +141,7 @@ client/
 │   ├── store/
 │   │   ├── analyticsStore.ts              # Zustand store for all analytics state
 │   │   ├── authStore.ts                   # Zustand store for auth and profile state
+│   │   ├── backendStore.ts                # Zustand store for backend wake-up status
 │   │   └── expenseStore.ts                # Zustand store for expenses and filters
 │   ├── types/
 │   │   ├── analytics.types.ts             # Analytics-related TypeScript types
@@ -183,13 +185,14 @@ Protected routes redirect to `/login` if no valid JWT token is present in `local
 
 ## State Management
 
-Global state is managed with **Zustand** across three stores:
+Global state is managed with **Zustand** across four stores:
 
 | Store            | Responsibility                                                                   |
 | ---------------- | -------------------------------------------------------------------------------- |
 | `authStore`      | User info, token, login, signup, profile updates, avatar, export, delete account |
 | `expenseStore`   | Expenses list, filters, pagination, CRUD operations                              |
 | `analyticsStore` | All analytics data — dashboard stats, category data, trends, yearly breakdowns   |
+| `backendStore`   | Tracks backend wake-up status to show a warming banner on the login page         |
 
 ## Expense Categories
 
